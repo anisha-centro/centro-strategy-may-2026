@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro Strategy Session · FY2026–28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-dark: #1e3a2b;
+  --green-mid: #2d5a40;
+  --green-light: #4a8c62;
+  --green-pale: #e8f3ec;
+  --green-faint: #f3f8f5;
+  --amber: #c47d0e;
+  --amber-pale: #fdf3e0;
+  --amber-faint: #fffaf0;
+  --red: #b03a2e;
+  --red-pale: #fdecea;
+  --ink: #1a1a1a;
+  --ink-mid: #4a4a4a;
+  --ink-light: #7a7a7a;
+  --border: #d8d8d0;
+  --border-light: #ebebeb;
+  --bg: #f7f6f2;
+  --white: #ffffff;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── JOIN SCREEN ── */
+#joinScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.join-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.join-org {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.join-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.join-sub {
+  font-size: 13px;
+  color: var(--ink-light);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.join-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.join-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  margin-bottom: 16px;
+  transition: border-color 0.15s;
+}
+.join-input:focus { outline: none; border-color: var(--green-light); }
+.join-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--green-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.15s;
+}
+.join-btn:hover { background: var(--green-mid); }
+.join-privacy {
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--ink-light);
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: var(--green-faint);
+  border-radius: var(--radius-sm);
+  text-align: left;
+}
+
+/* ── APP SHELL ── */
+#appShell { display: none; }
+.top-bar {
+  background: var(--green-dark);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.top-bar-left {
+  font-family: 'DM Serif Display', serif;
+  font-size: 15px;
+  color: #9fc9ae;
+  letter-spacing: 0.04em;
+}
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.presence-avatars {
+  display: flex;
+  gap: -4px;
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  border: 2px solid var(--green-dark);
+  margin-left: -6px;
+  flex-shrink: 0;
+}
+.you-badge {
+  font-size: 11px;
+  color: #9fc9ae;
+}
+
+/* ── PHASE NAV ── */
+.phase-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 32px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+.phase-tab {
+  font-size: 12px;
+  font-weight: 400;
+  padding: 14px 18px;
+  border: none;
+  background: none;
+  color: var(--ink-light);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.phase-tab:hover { color: var(--ink); }
+.phase-tab.active { color: var(--green-dark); border-bottom-color: var(--green-dark); font-weight: 500; }
+.phase-tab.facilitator-only { display: none; }
+
+/* ── FACILITATOR BANNER ── */
+.facilitator-banner {
+  background: var(--green-dark);
+  color: #9fc9ae;
+  font-size: 12px;
+  padding: 8px 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fac-dot { width: 6px; height: 6px; border-radius: 50%; background: #5dcaa5; flex-shrink: 0; }
+
+/* ── MAIN LAYOUT ── */
+.main { max-width: 800px; margin: 0 auto; padding: 32px 24px 80px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+.card-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 6px;
+}
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.card-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-mid);
+}
+.card-body.pending { color: var(--ink-light); font-style: italic; }
+
+/* ── VOTE ROW ── */
+.vote-section { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-light); }
+.vote-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.vote-who { font-size: 12px; color: var(--ink-light); flex-shrink: 0; }
+.vote-btn {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink-mid);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.12s;
+}
+.vote-btn:hover { border-color: var(--ink-mid); }
+.vote-btn.keep.active { background: var(--green-pale); border-color: var(--green-light); color: var(--green-dark); font-weight: 500; }
+.vote-btn.update.active { background: var(--amber-pale); border-color: var(--amber); color: var(--amber); font-weight: 500; }
+.vote-btn.remove.active { background: var(--red-pale); border-color: var(--red); color: var(--red); font-weight: 500; }
+
+.tally-row { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.tally-chip {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 400;
+}
+.tally-chip.keep { background: var(--green-pale); color: var(--green-dark); }
+.tally-chip.update { background: var(--amber-pale); color: var(--amber); }
+.tally-chip.remove { background: var(--red-pale); color: var(--red); }
+
+.decision-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+.decision-badge.keep { background: var(--green-pale); color: var(--green-dark); }
+.decision-badge.update { background: var(--amber-pale); color: var(--amber); }
+.decision-badge.remove { background: var(--red-pale); color: var(--red); }
+
+.timing-row { display: flex; gap: 6px; margin-top: 8px; align-items: center; }
+.timing-label { font-size: 12px; color: var(--ink-light); }
+.timing-btn {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink-mid);
+}
+.timing-btn.active { background: var(--amber-pale); border-color: var(--amber); color: var(--amber); }
+
+.note-area { margin-top: 12px; }
+.note-area textarea {
+  width: 100%;
+  font-size: 13px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.5;
+}
+.note-area textarea:focus { outline: none; border-color: var(--green-light); background: var(--white); }
+.note-save-btn {
+  margin-top: 6px;
+  font-size: 12px;
+  padding: 4px 14px;
+  border: 1px solid var(--green-light);
+  color: var(--green-dark);
+  background: transparent;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.note-save-btn:hover { background: var(--green-pale); }
+.note-saved { font-size: 12px; color: var(--green-light); margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
+.note-saved.show { opacity: 1; }
+
+/* ── CONSIDER CARD ── */
+.consider-card {
+  background: var(--amber-faint);
+  border: 1px solid #e8c97a;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.consider-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 5px;
+}
+.consider-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.consider-q { font-size: 13px; color: var(--ink-mid); line-height: 1.55; }
+
+/* ── LISTS ── */
+.item-list { padding-left: 18px; margin-top: 8px; }
+.item-list li { font-size: 13px; color: var(--ink-mid); line-height: 1.65; margin-bottom: 2px; }
+
+.kpi-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.kpi-chip {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--green-faint);
+  border: 1px solid #b8d9c5;
+  border-radius: 8px;
+  color: var(--green-dark);
+}
+
+/* ── INITIATIVE TABS ── */
+.init-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.init-tab {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink-mid);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.12s;
+}
+.init-tab:hover { border-color: var(--green-light); }
+.init-tab.active { background: var(--green-dark); border-color: var(--green-dark); color: white; }
+
+/* ── SUGGESTIONS ── */
+.sugg-list { margin-bottom: 14px; }
+.sugg-item {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.sugg-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.sugg-author { font-size: 11px; font-weight: 500; color: var(--green-light); margin-bottom: 4px; }
+.sugg-text { font-size: 14px; color: var(--ink); line-height: 1.5; }
+.sugg-del { font-size: 12px; color: var(--ink-light); background: none; border: none; cursor: pointer; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+.sugg-del:hover { background: var(--red-pale); color: var(--red); }
+.add-sugg-row { display: flex; gap: 8px; }
+.add-sugg-row input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+}
+.add-sugg-row input:focus { outline: none; border-color: var(--green-light); }
+.add-sugg-btn {
+  padding: 10px 18px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid var(--green-light);
+  color: var(--green-dark);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.add-sugg-btn:hover { background: var(--green-pale); }
+
+/* ── REVIEW ── */
+.review-section-head {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin: 24px 0 10px;
+}
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-light);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.review-label { font-size: 13px; color: var(--ink); flex: 1; line-height: 1.4; }
+.review-note { font-size: 12px; color: var(--ink-light); font-style: italic; width: 100%; margin-top: 3px; }
+.no-vote { font-size: 12px; color: var(--ink-light); font-style: italic; }
+
+.export-btn {
+  margin-top: 28px;
+  padding: 12px 28px;
+  background: var(--green-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+.export-btn:hover { background: var(--green-mid); }
+
+/* ── PAGE TITLES ── */
+.page-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-bottom: 6px;
+}
+.page-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.page-desc {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ── FACILITATOR CONTROLS ── */
+.fac-controls {
+  background: var(--green-faint);
+  border: 1px solid #b8d9c5;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: none;
+}
+.fac-controls.visible { display: block; }
+.fac-controls-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 8px; }
+.fac-btn {
+  font-size: 12px;
+  padding: 5px 12px;
+  border: 1px solid var(--green-light);
+  color: var(--green-dark);
+  background: var(--white);
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+.fac-btn:hover { background: var(--green-pale); }
+.fac-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+
+/* ── LOADING ── */
+#loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--ink-light);
+}
+</style>
+</head>
+<body>
+
+<div id="loading">Connecting…</div>
+<div id="joinScreen" style="display:none">
+  <div class="join-card">
+    <div class="join-org">Centro Community Partners</div>
+    <div class="join-title">FY2026–28 Strategy Session</div>
+    <div class="join-sub">Working from Arturo's v5 draft · May 2026</div>
+    <label class="join-label">Your name</label>
+    <input class="join-input" id="nameInput" type="text" placeholder="e.g. Anisha" maxlength="40" />
+    <label class="join-label">Role (optional)</label>
+    <input class="join-input" id="roleInput" type="text" placeholder="e.g. Executive Director" maxlength="60" />
+    <button class="join-btn" onclick="joinSession()">Join session →</button>
+    <div class="join-privacy">🔒 No client data here. Session votes and notes disappear when everyone leaves — nothing is stored permanently.</div>
+  </div>
+</div>
+
+<div id="appShell">
+  <div class="top-bar">
+    <div class="top-bar-left">Centro · Strategy Session</div>
+    <div class="top-bar-right">
+      <div class="presence-avatars" id="presenceAvatars"></div>
+      <div class="you-badge" id="youBadge"></div>
+    </div>
+  </div>
+
+  <div class="phase-nav" id="phaseNav">
+    <button class="phase-tab" onclick="goPhase('foundation')">Vision &amp; Mission</button>
+    <button class="phase-tab" onclick="goPhase('initiatives')">4 Initiatives</button>
+    <button class="phase-tab" onclick="goPhase('deep')">Deep Dive</button>
+    <button class="phase-tab" onclick="goPhase('suggestions')">New Ideas</button>
+    <button class="phase-tab" onclick="goPhase('review')">Final Review</button>
+  </div>
+
+  <div id="facilitatorBanner" class="facilitator-banner" style="display:none">
+    <div class="fac-dot"></div>
+    <span>You are the facilitator — you control which phase everyone sees.</span>
+  </div>
+
+  <div class="main" id="mainContent"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@liveblocks/client@2.13.2/dist/index.umd.js"></script>
+<script>
+const LIVEBLOCKS_KEY = 'pk_dev_gqZP28Q6fswdVv8e3954jnDyabxj511AMCWMja3m-LNCpjy2aByuxE18SLTURp_B';
+const ROOM_ID = 'centro-strategy-2026-v1';
+
+const AVATAR_COLORS = ['#2d5a40','#4a6fa5','#8b4a6e','#c47d0e','#5a7a4a','#6a4a8b','#b03a2e','#2a7a7a'];
+
+const DATA = {
+  foundation: [
+    {id:'mission', label:'Mission (v5)', text:'Expand economic opportunity for underserved entrepreneurs through entrepreneurship education, financial empowerment, access to capital preparation, and ecosystem partnerships that support long-term economic opportunity and mobility.'},
+    {id:'vision', label:'Vision — to confirm', text:'A world where low-to-moderate income informal workers have a clear, supported, and sustainable pathway to formal business ownership — where health and wealth are not competing priorities.'},
+    {id:'values', label:'Values — pending team input', text:'Not yet defined. Team to establish 4–6 organizational values at this session or assign to a follow-up process.', pending: true}
+  ],
+  initiatives: [
+    {id:'i1', num:'01', title:'A Sustainable Centro',
+     def:'Build the internal infrastructure — financial, operational, human, and governance — required to sustain and responsibly scale Centro\'s work over three years.',
+     v5:['Update accounting systems; strengthen HR compliance; establish legal oversight','Monthly financial close within 15 days; clean annual audit with no material findings','100% of staff receive annual performance reviews; staff retention at target level','Clarify decision rights across all functions; deputies identified for critical roles','Core processes documented; reduction in CEO-dependent decisions','Recruit board of 5–7 with expertise in finance, governance, tech, legal, fundraising','Institutional philanthropy: 91% today → 55–65% by FY28','Platform revenue: grow to 10–15%; Major donors: grow to 8–12%','Submit 50+ grants/year; target 25–35% win rate; 90% renewal rate'],
+     kpis:['Close within 15 days monthly','50+ grants/year; 25–35% win rate','Philanthropy below 75% by FY27'],
+     considers:[
+       {t:'Staffing model clarity', q:'Should the plan name the first critical hire (HR partner?) and describe the contractor model as an intentional cost strategy?'},
+       {t:'Named funder relationships', q:'Should the plan name Year 1 cultivation targets — Kapor Foundation (Lili Gangas) and MacArthur (Elizabeth Kane) as anchors?'},
+       {t:'Platform revenue milestone', q:'Should a platform revenue launch milestone — and the sliding scale pricing model ($5–$20/month) — be named in this plan?'}
+     ]},
+    {id:'i2', num:'02', title:'Accelerate the Transition',
+     def:'Serve more informal workers through the informal-to-formal business ownership transition — with deeper support, better tools, and longer-term tracking of income mobility outcomes.',
+     v5:['400–500 unique entrepreneurs served per year','200–300 business plans completed via the CEO platform','$500K in capital accessed (~$15K per Kiva loan)','100–150 entrepreneurs connected to ecosystem resources','Operationalize and expand CEO platform; integrate with program delivery','Strengthen coaching and training services','Expand partner-based delivery model (libraries, nonprofits, CDFIs)','Selective international collaboration: Canada, Latin America, Africa'],
+     kpis:['400–500 entrepreneurs/year','$500K capital accessed','80% baseline survey completion'],
+     considers:[
+       {t:'Primary client population — explicitly named', q:'Should the plan explicitly define the informal worker / side-hustle-to-business population as Centro\'s primary target?'},
+       {t:'Domestic geographic expansion sequence', q:'Should a Land & Expand domestic strategy be added? CA/NY (Year 1), DC (Year 2), third high-displacement market (Year 3).'},
+       {t:'CEO platform feature sequencing', q:'Should the phased feature roadmap live in this plan, or in a separate technology operating document?'},
+       {t:'Multilingual access strategy', q:'Should multilingual access be named as a platform commitment? Centro serves Spanish, Vietnamese, Chinese, Amharic, Yoruba, and Mixteco speakers.'}
+     ]},
+    {id:'i3', num:'03', title:'Technology With Integrity',
+     def:'Build and deploy AI tools that serve Centro\'s clients and staff — with clear data governance, human oversight, and responsible use standards at every decision point.',
+     v5:['Centralize program, operational, and impact data into integrated environment','50%+ reduction in duplicate/manual data entry','90%+ of participants tracked in centralized system; 90%+ data completeness','3–5 AI-assisted workflows implemented','20–30% reduction in staff time for selected processes','Annual cybersecurity assessment; 100% staff trained','Zero major data security incidents'],
+     kpis:['90%+ data completeness','3–5 AI workflows live','Zero major security incidents'],
+     considers:[
+       {t:'Named AI data governance policy', q:'Should the plan commit to a specific AI data policy by a named date? 82% of nonprofit staff use AI undocumented (Good Tech Summit).'},
+       {t:'Community data sovereignty', q:'Should Centro name "your data, not ours" as an explicit strategic principle? Strong differentiator with Kapor Foundation.'},
+       {t:'Human-in-the-loop standard', q:'Should the plan define where human review is required — AI always escalates at pivotal client decisions?'},
+       {t:'Strategic lagging as tech philosophy', q:'Should the plan name staying 2+ years behind cutting-edge tech as a principle? Signals prudence to risk-averse funders.'}
+     ]},
+    {id:'i4', num:'04', title:'Prove and Amplify Impact',
+     def:'Build the evidence base, measurement systems, and external narrative that demonstrate Centro\'s impact credibly — to clients, funders, partners, and the broader field.',
+     v5:['Operationalize Theory of Change as shared framework','Implement impact evaluation systems; align programs with ToC indicators','Interview 100 clients/year on program impact','Survey targets: 80% baseline; 80% graduation; 50% at 6 mo; 30% at 12 mo','12 success stories per year','25–50 high-net-worth donor prospects identified annually','Develop core materials: pitch deck, impact report, donor briefs','Refresh brand and messaging; redesign website'],
+     kpis:['100 client interviews/year','12 success stories/year','25–50 HNW prospects identified'],
+     considers:[
+       {t:'Align Theory of Change to 4 Impact Model metrics', q:'Should the ToC section adopt four economic mobility outcome metrics as long-term indicators?'},
+       {t:'Alumni tracking built into the platform', q:'Should the plan name passive alumni tracking as a platform design requirement tied to 12- and 24-month outcome KPIs?'},
+       {t:'Standardized impact taxonomy', q:'Worth adopting True Impact\'s framework (8,500 programs globally) to reduce custom funder reporting burden?'},
+       {t:'AI Work Resettlement thought leadership', q:'Should Centro aim for a named presence in the AI displacement and informal economy policy conversation over this plan period?'}
+     ]}
+  ]
+};
+
+let myName = '', myColor = '', isFacilitator = false;
+let room, storage, presence;
+let currentPhase = 'foundation';
+let currentInitIdx = 0;
+let localNotes = {};
+
+function colorFor(name) {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+  return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+}
+
+function initials(name) {
+  return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+}
+
+async function joinSession() {
+  const nameEl = document.getElementById('nameInput');
+  const roleEl = document.getElementById('roleInput');
+  const name = nameEl.value.trim();
+  if (!name) { nameEl.focus(); return; }
+  myName = name;
+  myColor = colorFor(name);
+  document.getElementById('joinScreen').style.display = 'none';
+  document.getElementById('loading').style.display = 'flex';
+  await connectLiveblocks();
+}
+
+async function connectLiveblocks() {
+  try {
+    const client = LiveblocksClient.createClient({ publicApiKey: LIVEBLOCKS_KEY });
+    room = client.enterRoom(ROOM_ID, {
+      initialPresence: { name: myName, color: myColor, phase: 'foundation', initIdx: 0 },
+      initialStorage: { votes: {}, notes: {}, suggestions: [], facilitator: '', phase: 'foundation', initIdx: 0 }
+    });
+
+    const { root } = await room.getStorage();
+    storage = root;
+
+    // First person in becomes facilitator
+    const others = room.getOthers();
+    const stored = storage.get('facilitator');
+    if (!stored || stored === '') {
+      storage.set('facilitator', myName);
+      isFacilitator = true;
+    } else {
+      isFacilitator = (stored === myName);
+    }
+
+    room.subscribe(storage, () => { syncFromStorage(); renderMain(); });
+    room.subscribe('others', () => { renderPresence(); });
+
+    // Sync phase from storage for non-facilitators
+    syncFromStorage();
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('appShell').style.display = 'block';
+    if (isFacilitator) document.getElementById('facilitatorBanner').style.display = 'flex';
+
+    renderPresence();
+    renderPhaseNav();
+    renderMain();
+
+    // Poll for phase changes (non-facilitator follows facilitator)
+    if (!isFacilitator) {
+      setInterval(() => {
+        const p = storage.get('phase');
+        const i = storage.get('initIdx');
+        if (p && p !== currentPhase) { currentPhase = p; renderPhaseNav(); renderMain(); }
+        if (i !== undefined && i !== currentInitIdx) { currentInitIdx = i; renderMain(); }
+      }, 800);
+    }
+
+  } catch(e) {
+    document.getElementById('loading').innerHTML = 'Could not connect. Check your API key and try again.<br><small>' + e.message + '</small>';
+  }
+}
+
+function syncFromStorage() {
+  if (!isFacilitator) {
+    const p = storage.get('phase');
+    const i = storage.get('initIdx');
+    if (p) currentPhase = p;
+    if (i !== undefined) currentInitIdx = i;
+  }
+}
+
+function goPhase(phase) {
+  if (!isFacilitator) return;
+  currentPhase = phase;
+  storage.set('phase', phase);
+  renderPhaseNav();
+  renderMain();
+}
+
+function setInitiative(idx) {
+  currentInitIdx = idx;
+  if (isFacilitator) storage.set('initIdx', idx);
+  renderMain();
+}
+
+function renderPresence() {
+  const others = room.getOthers();
+  const all = [{ name: myName, color: myColor, isMe: true }, ...others.map(o => ({ name: o.presence?.name || '?', color: o.presence?.color || '#888', isMe: false }))];
+  document.getElementById('presenceAvatars').innerHTML = all.map(p =>
+    `<div class="avatar" style="background:${p.color}" title="${p.name}">${initials(p.name)}</div>`
+  ).join('');
+  document.getElementById('youBadge').textContent = myName + (isFacilitator ? ' · facilitator' : '');
+}
+
+function renderPhaseNav() {
+  const tabs = document.querySelectorAll('.phase-tab');
+  const phaseMap = ['foundation','initiatives','deep','suggestions','review'];
+  tabs.forEach((t, i) => {
+    t.classList.toggle('active', phaseMap[i] === currentPhase);
+    if (!isFacilitator) t.style.pointerEvents = 'none';
+  });
+}
+
+// ── VOTES ──
+function castVote(itemId, vote) {
+  const votes = storage.get('votes') || {};
+  const key = itemId + '::' + myName;
+  if (votes[key] === vote) delete votes[key];
+  else votes[key] = vote;
+  storage.set('votes', { ...votes });
+}
+
+function setTiming(itemId, timing) {
+  const votes = storage.get('votes') || {};
+  const key = itemId + '::timing::' + myName;
+  if (votes[key] === timing) delete votes[key];
+  else votes[key] = timing;
+  storage.set('votes', { ...votes });
+}
+
+function getVotes(itemId) {
+  const votes = storage.get('votes') || {};
+  const key = itemId + '::' + myName;
+  return votes[key] || null;
+}
+
+function getTiming(itemId) {
+  const votes = storage.get('votes') || {};
+  return votes[itemId + '::timing::' + myName] || null;
+}
+
+function getTally(itemId) {
+  const votes = storage.get('votes') || {};
+  const tally = { keep: 0, update: 0, remove: 0 };
+  Object.entries(votes).forEach(([k, v]) => {
+    if (k.startsWith(itemId + '::') && !k.includes('::timing::')) tally[v] = (tally[v] || 0) + 1;
+  });
+  return tally;
+}
+
+function getDecision(itemId) {
+  const t = getTally(itemId);
+  const total = t.keep + t.update + t.remove;
+  if (!total) return null;
+  if (t.keep >= t.update && t.keep >= t.remove) return 'keep';
+  if (t.update >= t.keep && t.update >= t.remove) return 'update';
+  return 'remove';
+}
+
+function saveNote(itemId) {
+  const el = document.getElementById('note_' + itemId);
+  if (!el) return;
+  const notes = storage.get('notes') || {};
+  notes[itemId] = el.value;
+  storage.set('notes', { ...notes });
+  const saved = document.getElementById('notesaved_' + itemId);
+  if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 1500); }
+}
+
+function getNote(itemId) {
+  const notes = storage.get('notes') || {};
+  return notes[itemId] || '';
+}
+
+// ── SUGGESTIONS ──
+function addSuggestion() {
+  const el = document.getElementById('suggInput');
+  if (!el || !el.value.trim()) return;
+  const suggestions = [...(storage.get('suggestions') || [])];
+  suggestions.push({ id: 'sg' + Date.now(), text: el.value.trim(), author: myName });
+  storage.set('suggestions', suggestions);
+  el.value = '';
+}
+
+function removeSuggestion(id) {
+  const suggestions = (storage.get('suggestions') || []).filter(s => s.id !== id);
+  storage.set('suggestions', suggestions);
+}
+
+// ── VOTE BLOCK HTML ──
+function voteBlock(itemId) {
+  const myVote = getVotes(itemId);
+  const tally = getTally(itemId);
+  const decision = getDecision(itemId);
+  const timing = getTiming(itemId);
+  const note = getNote(itemId);
+  const total = tally.keep + tally.update + tally.remove;
+
+  let tallyHtml = '';
+  if (total > 0) {
+    tallyHtml = '<div class="tally-row">'
+      + (tally.keep ? `<span class="tally-chip keep">${tally.keep} keep</span>` : '')
+      + (tally.update ? `<span class="tally-chip update">${tally.update} update</span>` : '')
+      + (tally.remove ? `<span class="tally-chip remove">${tally.remove} remove</span>` : '')
+      + '</div>';
+  }
+
+  let timingHtml = myVote === 'update' ? `
+    <div class="timing-row">
+      <span class="timing-label">Update when?</span>
+      <button class="timing-btn ${timing === 'now' ? 'active' : ''}" onclick="setTiming('${itemId}','now')">Now</button>
+      <button class="timing-btn ${timing === 'later' ? 'active' : ''}" onclick="setTiming('${itemId}','later')">Defer</button>
+    </div>` : '';
+
+  let decisionHtml = decision ? `<div class="decision-badge ${decision}">${decision === 'keep' ? '✓ Keeping' : decision === 'update' ? '✎ Updating' + (timing ? ' (' + timing + ')' : '') : '✕ Removing'}</div>` : '';
+
+  return `
+    <div class="vote-section">
+      <div class="vote-row">
+        <span class="vote-who">Your vote:</span>
+        <button class="vote-btn keep ${myVote === 'keep' ? 'active' : ''}" onclick="castVote('${itemId}','keep')">Keep</button>
+        <button class="vote-btn update ${myVote === 'update' ? 'active' : ''}" onclick="castVote('${itemId}','update')">Update</button>
+        <button class="vote-btn remove ${myVote === 'remove' ? 'active' : ''}" onclick="castVote('${itemId}','remove')">Remove</button>
+      </div>
+      ${timingHtml}
+      ${tallyHtml}
+      ${decisionHtml}
+      <div class="note-area">
+        <textarea id="note_${itemId}" placeholder="Notes or proposed edits…">${note}</textarea>
+        <button class="note-save-btn" onclick="saveNote('${itemId}')">Save note</button>
+        <span class="note-saved" id="notesaved_${itemId}">Saved</span>
+      </div>
+    </div>`;
+}
+
+function decisionBadge(itemId) {
+  const d = getDecision(itemId);
+  if (!d) return '<span class="no-vote">No votes yet</span>';
+  const labels = { keep: '✓ Keep', update: '✎ Update', remove: '✕ Remove' };
+  return `<span class="decision-badge ${d}">${labels[d]}</span>`;
+}
+
+// ── RENDER PAGES ──
+function renderMain() {
+  const el = document.getElementById('mainContent');
+  if (currentPhase === 'foundation') el.innerHTML = renderFoundation();
+  else if (currentPhase === 'initiatives') el.innerHTML = renderInitiatives();
+  else if (currentPhase === 'deep') el.innerHTML = renderDeep();
+  else if (currentPhase === 'suggestions') el.innerHTML = renderSuggestions();
+  else if (currentPhase === 'review') el.innerHTML = renderReview();
+}
+
+function renderFoundation() {
+  return `
+    <div class="page-eyebrow">Phase 1</div>
+    <div class="page-title">Vision, mission &amp; values</div>
+    <div class="page-desc">Read individually, then discuss as a group. Vote to keep, update, or remove each. Use the notes field for proposed edits.</div>
+    ${DATA.foundation.map(f => `
+      <div class="card">
+        <div class="card-label">${f.label}</div>
+        <div class="card-body ${f.pending ? 'pending' : ''}">${f.text}</div>
+        ${voteBlock(f.id)}
+      </div>`).join('')}`;
+}
+
+function renderInitiatives() {
+  return `
+    <div class="page-eyebrow">Phase 2</div>
+    <div class="page-title">4 strategic initiatives</div>
+    <div class="page-desc">Vote on the framing — title and definition — of each initiative before we go deeper into the content inside each one.</div>
+    ${DATA.initiatives.map(i => `
+      <div class="card">
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px">
+          <span style="font-family:'DM Serif Display',serif;font-size:32px;color:#d0ccc4;line-height:1">${i.num}</span>
+          <span class="card-title" style="margin:0">${i.title}</span>
+        </div>
+        <div class="card-body">${i.def}</div>
+        ${voteBlock('ititle_' + i.id)}
+      </div>`).join('')}`;
+}
+
+function renderDeep() {
+  const ini = DATA.initiatives[currentInitIdx];
+  return `
+    <div class="page-eyebrow">Phase 3 — Deep dive</div>
+    <div class="page-title">${ini.num}: ${ini.title}</div>
+    <div class="page-desc">Review what's defined in v5, then vote on each suggested addition individually.</div>
+    <div class="init-tabs">
+      ${DATA.initiatives.map((x, i) => `<button class="init-tab ${currentInitIdx === i ? 'active' : ''}" onclick="setInitiative(${i})">${x.num} ${x.title}</button>`).join('')}
+    </div>
+    <div class="card">
+      <div class="card-label">From v5 — what's already defined</div>
+      <ul class="item-list">${ini.v5.map(x => `<li>${x}</li>`).join('')}</ul>
+      <div class="card-label" style="margin-top:14px">KPIs from v5</div>
+      <div class="kpi-grid">${ini.kpis.map(k => `<span class="kpi-chip">${k}</span>`).join('')}</div>
+      ${voteBlock('v5_' + ini.id)}
+    </div>
+    <div class="card-label" style="margin:18px 0 10px;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light)">Suggested additions — vote on each</div>
+    ${ini.considers.map((c, ci) => `
+      <div class="consider-card">
+        <div class="consider-tag">Consider adding</div>
+        <div class="consider-title">${c.t}</div>
+        <div class="consider-q">${c.q}</div>
+        ${voteBlock('con_' + ini.id + '_' + ci)}
+      </div>`).join('')}`;
+}
+
+function renderSuggestions() {
+  const suggestions = storage.get('suggestions') || [];
+  return `
+    <div class="page-eyebrow">Phase 4</div>
+    <div class="page-title">New suggestions</div>
+    <div class="page-desc">Open floor. Anyone can add something that wasn't in v5 or the consideration cards. Add it, then vote as a group.</div>
+    <div class="sugg-list">
+      ${suggestions.length === 0 ? '<div style="font-size:13px;color:var(--ink-light);font-style:italic;margin-bottom:14px">No suggestions yet — add one below.</div>' : ''}
+      ${suggestions.map(s => `
+        <div class="sugg-item">
+          <div class="sugg-header">
+            <div>
+              <div class="sugg-author">${s.author}</div>
+              <div class="sugg-text">${s.text}</div>
+            </div>
+            ${s.author === myName ? `<button class="sugg-del" onclick="removeSuggestion('${s.id}')">✕</button>` : ''}
+          </div>
+          ${voteBlock('sg_' + s.id)}
+        </div>`).join('')}
+    </div>
+    <div class="add-sugg-row">
+      <input type="text" id="suggInput" placeholder="Type a new idea…" onkeydown="if(event.key==='Enter')addSuggestion()">
+      <button class="add-sugg-btn" onclick="addSuggestion()">+ Add</button>
+    </div>`;
+}
+
+function renderReview() {
+  const suggestions = storage.get('suggestions') || [];
+  const allItems = [
+    ...DATA.foundation.map(f => ({ id: f.id, label: f.label })),
+    ...DATA.initiatives.map(i => ({ id: 'ititle_' + i.id, label: `Initiative ${i.num}: ${i.title}` })),
+    ...DATA.initiatives.map(i => ({ id: 'v5_' + i.id, label: `${i.num} ${i.title} — v5 content` })),
+    ...DATA.initiatives.flatMap(i => i.considers.map((c, ci) => ({ id: 'con_' + i.id + '_' + ci, label: `${i.num}: ${c.t}` }))),
+    ...suggestions.map(s => ({ id: 'sg_' + s.id, label: `New idea: "${s.text.slice(0, 60)}${s.text.length > 60 ? '…' : ''}"` }))
+  ];
+
+  const groups = [
+    { label: 'Vision, mission & values', items: allItems.slice(0, 3) },
+    { label: 'Initiative titles & definitions', items: allItems.slice(3, 7) },
+    { label: 'V5 content blocks', items: allItems.slice(7, 11) },
+    { label: 'Suggested additions', items: allItems.slice(11, 11 + DATA.initiatives.reduce((a, i) => a + i.considers.length, 0)) },
+    { label: 'New suggestions from the session', items: suggestions.map(s => ({ id: 'sg_' + s.id, label: `"${s.text.slice(0, 60)}"` })) }
+  ];
+
+  return `
+    <div class="page-eyebrow">Phase 5</div>
+    <div class="page-title">Final review</div>
+    <div class="page-desc">A complete summary of every decision made in this session.</div>
+    ${groups.map(g => g.items.length === 0 ? '' : `
+      <div class="review-section-head">${g.label}</div>
+      ${g.items.map(item => {
+        const note = getNote(item.id);
+        return `<div class="review-row">
+          <span class="review-label">${item.label}</span>
+          ${decisionBadge(item.id)}
+          ${note ? `<span class="review-note">Note: ${note}</span>` : ''}
+        </div>`;
+      }).join('')}`).join('')}
+    <button class="export-btn" onclick="exportSummary()">Download summary</button>`;
+}
+
+function exportSummary() {
+  const suggestions = storage.get('suggestions') || [];
+  const lines = ['Centro FY2026–28 Strategy Session Summary', 'Date: ' + new Date().toLocaleDateString(), ''];
+  function section(title, items) {
+    lines.push('## ' + title);
+    items.forEach(x => {
+      const d = getDecision(x.id) || 'no vote';
+      const note = getNote(x.id);
+      lines.push('• ' + x.label + ' → ' + d.toUpperCase());
+      if (note) lines.push('  Note: ' + note);
+    });
+    lines.push('');
+  }
+  section('Vision, Mission & Values', DATA.foundation.map(f => ({ id: f.id, label: f.label })));
+  section('Initiative Titles', DATA.initiatives.map(i => ({ id: 'ititle_' + i.id, label: i.num + ' ' + i.title })));
+  section('V5 Content Blocks', DATA.initiatives.map(i => ({ id: 'v5_' + i.id, label: i.num + ' ' + i.title })));
+  section('Suggested Additions', DATA.initiatives.flatMap(i => i.considers.map((c, ci) => ({ id: 'con_' + i.id + '_' + ci, label: i.num + ': ' + c.t }))));
+  if (suggestions.length) section('New Suggestions', suggestions.map(s => ({ id: 'sg_' + s.id, label: s.text })));
+  const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'centro_strategy_session_' + new Date().toISOString().slice(0,10) + '.txt'; a.click();
+}
+
+document.getElementById('loading').style.display = 'none';
+document.getElementById('joinScreen').style.display = 'flex';
+</script>
+</body>
+</html>
